@@ -1,7 +1,21 @@
 <html>
 <head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Tetris</title>
     <style>
+    	#message-container{
+    		width:40%;
+    		max-width: 200px;
+    		display: flex;
+    		justify-content: center;
+    	}
+    	#message-container div{
+    		padding: 5px;
+    		color:#CCC;
+    	}
+    	#message-container div:nth-child(2n){
+    		background-color: #fff;
+    	}
         body {
             background: #000;
             display: flex;
@@ -23,9 +37,122 @@
             border: solid .2em #707070;
             height: 80vh;
         }
+        
+
+.emoji {
+    font-size: 20px;
+    min-width: 1.4em;
+    margin: 0.3em 0.4em;
+    text-align: center;
+}
+.emoji:hover
+ {
+	font-size: 60px;
+}
+.emoji::after {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.clock::after {
+    content: '🕛';
+    animation-name: clock;
+    animation-duration: 5s;
+}
+
+
+
+.hourglass::after {
+    content: '😁';
+    --emoji: '🤣';
+    animation-name: twoFrames;
+    animation-duration: 1.2s;
+}
+
+
+.bomb::after {
+    content: '🤷‍♀️';
+    --emoji: '🤦‍♂️';
+    animation-name: twoFrames;
+    animation-duration: 2s;
+}
+
+
+
+
+@keyframes twoFrames {
+    50% {
+        content: var(--emoji);
+    }
+}
+
+@keyframes threeFrames {
+    33.333% {
+        content: var(--emoji-1);
+    }
+
+    66.666% {
+        content: var(--emoji-2);
+    }
+}
+
+
+
+
+
+
+
+@keyframes clock {
+    8.333% {
+        content: '🕐';
+    }
+
+    16.666% {
+        content: '🕑';
+    }
+
+    25% {
+        content: '🕒';
+    }
+
+    33.333% {
+        content: '🕓';
+    }
+
+    41.666% {
+        content: '🕔';
+    }
+
+    50% {
+        content: '🕕';
+    }
+
+    58.333% {
+        content: '🕖';
+    }
+
+    66.666% {
+        content: '🕗';
+    }
+
+    75% {
+        content: '🕘';
+    }
+
+    83.333% {
+        content: '🕙';
+    }
+
+    91.666% {
+        content: '🕚';
+    }
+}
+
     </style>
 </head>
 <body>
+	<embed  src="bg.mp3" loop="true" hidden="true" autostart="true">
+		
     <template id="player-template">
         <div class="player">
             <div class="score"></div>
@@ -33,6 +160,8 @@
         </div>
     </template>
 
+
+ 
     <script src="client/connection-manager.js"></script>
     <script src="client/tetris-manager.js"></script>
 
@@ -41,5 +170,17 @@
     <script src="client/player.js"></script>
     <script src="client/tetris.js"></script>
     <script src="client/main.js"></script>
+   
+		<div id="message-container">
+			<form id="send-container">
+				<span class="emoji clock" role="img" aria-label="clock"></span>
+
+                <span class="emoji hourglass" role="img" aria-label="hourglass"></span>
+
+                <span class="emoji bomb" role="img" aria-label="bomb exploding"></span>
+                <span class="emoji hearts" role="img" aria-label="hearts"></span>
+			</form>
+		</div>
 </body>
 </html>
+
